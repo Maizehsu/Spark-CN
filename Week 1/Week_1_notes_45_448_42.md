@@ -135,6 +135,152 @@ vector<int> vectors_set_union(vector<int> v1,vector<int> v2){
 }
 ~~~
 
+
+
+## Leetcode 45. Jump Game II
+
+Given an array of non-negative integers `nums`, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Your goal is to reach the last index in the minimum number of jumps.
+
+You can assume that you can always reach the last index.
+
+**Example 1:**
+
+```
+Input: nums = [2,3,1,1,4]
+Output: 2
+Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+```
+
+**Example 2:**
+
+```
+Input: nums = [2,3,0,1,4]
+Output: 2
+```
+
+**Constraints:**
+
+- `1 <= nums.length <= 104`
+- `0 <= nums[i] <= 1000`
+
+#### My Solution
+
+Following this video https://www.youtube.com/watch?v=Ua_Vqtdd61E , applyng BFS.
+
+~~~c++
+class Solution
+{
+public:
+    int jump(vector<int> &nums)
+    {
+        int start = 0, end = 0;
+        int step = 0;
+        // Corner case: size = 1
+        if (nums.size() == 1)
+            return 0;
+
+        while (start <= end)
+        {
+            int end_new = end;
+            for (int i = start; i <= end; i++)
+            {
+                end_new = max(end_new, i + nums[i]);
+                if (end_new >= nums.size() - 1)
+                    return step + 1;
+            }
+            step += 1;
+            // Stores the farthest place in the last step
+            start = end + 1;
+            end = end_new;
+        }
+        return -1;
+    }
+};
+~~~
+
+
+
+## Leetcode 42. Trapping Rain Water
+
+Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.
+
+**Example 1:**
+
+![img](../../../../GitHub/FigureBed/rainwatertrap.png)
+
+```
+Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+```
+
+**Example 2:**
+
+```
+Input: height = [4,2,0,3,2,5]
+Output: 9
+```
+
+**Constraints:**
+
+- `n == height.length`
+- `1 <= n <= 2 * 104`
+- `0 <= height[i] <= 105`
+
+#### Best Solution
+
+思路：对撞指针。
+
+~~~c++
+class Solution {
+public:
+    int trap(int A[], int n) {
+        int left = 0; int right = n-1;
+        int res = 0;
+        int maxleft = 0, maxright = 0;
+        while(left <= right){
+            if(A[left] <= A[right]){
+                if(A[left] >= maxleft) maxleft = A[left];
+                else res + =maxleft - A[left];
+                left++;
+            }
+            else{
+                if(A[right] >= maxright) maxright = A[right];
+                else res += maxright - A[right];
+                right--;
+            }
+        }
+        return res;
+    }
+};
+~~~
+
+更简洁的写法：https://github.com/luliyucoordinate/Leetcode/blob/master/src/0042-Trapping-Rain-Water/0042.cpp
+
+~~~c++
+class Solution 
+{
+public:
+    int trap(vector<int>& height) 
+    {
+        int l = 0, r = height.size()-1, level = 0, water = 0;
+        while (l < r) 
+        {
+            int lower = height[height[l] < height[r] ? l++ : r--];
+            level = max(level, lower);
+            water += level - lower;
+        }
+        return water;
+    }
+};
+~~~
+
+
+
 #### Reference
 
 [1]. https://www.cplusplus.com/reference/algorithm/unique/
