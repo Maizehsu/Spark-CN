@@ -122,7 +122,7 @@ vector<int> vectors_intersection(vector<int> v1,vector<int> v2){
 	vector<int> v;
 	sort(v1.begin(),v1.end());   
 	sort(v2.begin(),v2.end());   
-	set_intersection(v1.begin(),v1.end(),v2.begin(),v2.end(),std::inserter(v, v.begin()));//求交集 
+	set_intersection(v1.begin(),v1.end(),v2.begin(),v2.end(),std::inserter(v, v.begin())); //求交集 
 	return v;
 }
 
@@ -130,7 +130,7 @@ vector<int> vectors_set_union(vector<int> v1,vector<int> v2){
 	vector<int> v;
 	sort(v1.begin(),v1.end());   
 	sort(v2.begin(),v2.end());   
-	set_union(v1.begin(),v1.end(),v2.begin(),v2.end(),std::inserter(v, v.begin()));//求并集 
+	set_union(v1.begin(),v1.end(),v2.begin(),v2.end(),std::inserter(v, v.begin())); //求并集 
 	return v;
 }
 ~~~
