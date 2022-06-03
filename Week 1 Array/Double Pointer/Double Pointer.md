@@ -12,5 +12,5 @@
 #### Problems
 
 - **Basic**: 27
-- **Variant**: 
-- **Advanced**: 
+- **Variant**: 283, 977
+- **Advanced**: 844
