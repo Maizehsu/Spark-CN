@@ -32,3 +32,6 @@ A study group that aims at preparing for SDE Internship and discussing Leetcode 
   - Add *new problems* or your implementation of the existing problems;
   - Add *new folders* along with your *code and notes* to the corresponding topics;
   - Refine and alter the *existing notes / template*.
+- For big structural change please
+  - Create your own branch;
+  - Launch a merge request.
